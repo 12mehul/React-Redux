@@ -12,3 +12,16 @@ export const fetchProductsService = async () => {
     throw new Error(errorMessage);
   }
 };
+
+export const fetchProductByIdService = async (id) => {
+  try {
+    const response = await axios.get(
+      `https://api.escuelajs.co/api/v1/products/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || "Failed to fetch product";
+    throw new Error(errorMessage);
+  }
+};

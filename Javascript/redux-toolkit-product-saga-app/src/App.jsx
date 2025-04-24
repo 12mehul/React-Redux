@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Container, Row } from "react-bootstrap";
 import NavigationsBar from "./components/NavigationsBar";
 import Products from "./components/Products";
+import ProductDetails from "./components/ProductDetails";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <NavigationsBar />
           <Routes>
             <Route path="/" element={<Products />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
           </Routes>
         </Row>
       </Container>
