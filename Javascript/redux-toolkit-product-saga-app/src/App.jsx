@@ -5,6 +5,7 @@ import { Container, Row } from "react-bootstrap";
 import NavigationsBar from "./components/NavigationsBar";
 import Products from "./components/Products";
 import ProductDetails from "./components/ProductDetails";
+import AddProduct from "./components/AddProduct";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Products />} />
             <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/add-product" element={<AddProduct />} />
           </Routes>
         </Row>
       </Container>

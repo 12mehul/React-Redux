@@ -19,7 +19,7 @@ const ProductDetails = () => {
     <Container>
       <h1 className="text-center my-4">View Product</h1>
       {product && (
-        <Card>
+        <Card className="w-75 mx-auto">
           <Row className="d-flex align-items-center justify-content-center p-4">
             <Col md={4}>
               <Carousel>

@@ -25,3 +25,17 @@ export const fetchProductByIdService = async (id) => {
     throw new Error(errorMessage);
   }
 };
+
+export const createProductService = async (product) => {
+  try {
+    const response = await axios.post(
+      "https://api.escuelajs.co/api/v1/products",
+      product
+    );
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || "Failed to create product";
+    throw new Error(errorMessage);
+  }
+};
