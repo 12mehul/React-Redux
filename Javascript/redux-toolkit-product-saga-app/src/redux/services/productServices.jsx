@@ -1,10 +1,10 @@
 import axios from "axios";
 
+const apiUrl = "https://api.escuelajs.co/api/v1/products";
+
 export const fetchProductsService = async () => {
   try {
-    const response = await axios.get(
-      "https://api.escuelajs.co/api/v1/products"
-    );
+    const response = await axios.get(`${apiUrl}`);
     return response.data;
   } catch (error) {
     const errorMessage =
@@ -15,9 +15,7 @@ export const fetchProductsService = async () => {
 
 export const fetchProductByIdService = async (id) => {
   try {
-    const response = await axios.get(
-      `https://api.escuelajs.co/api/v1/products/${id}`
-    );
+    const response = await axios.get(`${apiUrl}/${id}`);
     return response.data;
   } catch (error) {
     const errorMessage =
@@ -28,14 +26,22 @@ export const fetchProductByIdService = async (id) => {
 
 export const createProductService = async (product) => {
   try {
-    const response = await axios.post(
-      "https://api.escuelajs.co/api/v1/products",
-      product
-    );
+    const response = await axios.post(`${apiUrl}`, product);
     return response.data;
   } catch (error) {
     const errorMessage =
       error.response?.data?.message || "Failed to create product";
+    throw new Error(errorMessage);
+  }
+};
+
+export const updateProductService = async (id, product) => {
+  try {
+    const response = await axios.put(`${apiUrl}/${id}`, product);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || "Failed to update product";
     throw new Error(errorMessage);
   }
 };

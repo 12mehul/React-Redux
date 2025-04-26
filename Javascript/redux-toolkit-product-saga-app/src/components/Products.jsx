@@ -13,6 +13,10 @@ const Products = () => {
     navigate(`/product/${id}`);
   };
 
+  const handleEditClick = (id) => {
+    navigate(`/edit-product/${id}`);
+  };
+
   useEffect(() => {
     dispatch(fetchProductsStart());
   }, [dispatch]);
@@ -43,7 +47,11 @@ const Products = () => {
                 >
                   View
                 </Button>
-                <Button variant="outline-secondary" size="lg">
+                <Button
+                  variant="outline-secondary"
+                  size="lg"
+                  onClick={() => handleEditClick(val.id)}
+                >
                   Edit
                 </Button>
                 <Button variant="outline-danger" size="lg">

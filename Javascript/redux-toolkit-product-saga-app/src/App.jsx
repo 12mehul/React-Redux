@@ -6,6 +6,7 @@ import NavigationsBar from "./components/NavigationsBar";
 import Products from "./components/Products";
 import ProductDetails from "./components/ProductDetails";
 import AddProduct from "./components/AddProduct";
+import EditProduct from "./components/EditProduct";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="/" element={<Products />} />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/edit-product/:id" element={<EditProduct />} />
           </Routes>
         </Row>
       </Container>
