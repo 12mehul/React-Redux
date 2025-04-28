@@ -3,6 +3,7 @@ import {
   createProductService,
   fetchProductByIdService,
   fetchProductsService,
+  updateProductService,
 } from "../services/productServices";
 import {
   fetchProductsFailure,
@@ -11,6 +12,9 @@ import {
   fetchSingleProductFailure,
   fetchSingleProductStart,
   fetchSingleProductSuccess,
+  updateProductFailure,
+  updateProductStart,
+  updateProductSuccess,
 } from "../slice/productSlice";
 import {
   addProductFailure,
@@ -45,6 +49,16 @@ function* createProductSaga(action) {
   }
 }
 
+function* updateProductSaga(action) {
+  const { id, product } = action.payload;
+  try {
+    const updatedProduct = yield call(updateProductService, { id, product });
+    yield put(updateProductSuccess(updatedProduct));
+  } catch (error) {
+    yield put(updateProductFailure(error));
+  }
+}
+
 export function* watcherProductSaga() {
   yield takeEvery(fetchProductsStart().type, productSaga);
 }
@@ -53,4 +67,7 @@ export function* watcherSingleProductSaga() {
 }
 export function* watcherCreateProductSaga() {
   yield takeEvery(addProductStart, createProductSaga);
+}
+export function* watcherUpdateProductSaga() {
+  yield takeEvery(updateProductStart, updateProductSaga);
 }

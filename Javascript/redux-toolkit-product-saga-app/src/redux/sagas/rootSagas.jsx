@@ -3,6 +3,7 @@ import {
   watcherCreateProductSaga,
   watcherProductSaga,
   watcherSingleProductSaga,
+  watcherUpdateProductSaga,
 } from "./productSagas";
 
 export default function* rootSagas() {
@@ -10,5 +11,6 @@ export default function* rootSagas() {
     watcherProductSaga(),
     watcherSingleProductSaga(),
     watcherCreateProductSaga(),
+    watcherUpdateProductSaga(),
   ]);
 }

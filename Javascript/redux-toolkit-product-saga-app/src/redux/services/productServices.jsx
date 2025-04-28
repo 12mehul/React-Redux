@@ -35,7 +35,7 @@ export const createProductService = async (product) => {
   }
 };
 
-export const updateProductService = async (id, product) => {
+export const updateProductService = async ({ id, product }) => {
   try {
     const response = await axios.put(`${apiUrl}/${id}`, product);
     return response.data;

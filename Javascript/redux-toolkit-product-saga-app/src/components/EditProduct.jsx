@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Card, Container, Form, Row } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 import { useFetch } from "../customHook/useFetch";
-import { useParams } from "react-router-dom";
+import { Button, Card, Container, Form, Row } from "react-bootstrap";
 import {
   fetchSingleProductStart,
   updateImage,
@@ -12,11 +12,11 @@ import {
 
 const EditProduct = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { data: category } = useFetch("categories");
   const { product } = useSelector((state) => state.products);
   const [image, setImage] = useState("");
-  console.log(product);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -50,7 +50,8 @@ const EditProduct = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateProductStart(id, product));
+    dispatch(updateProductStart({ id, product }));
+    setTimeout(() => navigate("/"), 1000);
   };
 
   useEffect(() => {
