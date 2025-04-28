@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Card, Carousel, Col, Container, Row } from "react-bootstrap";
@@ -8,6 +8,7 @@ const Products = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, products, error } = useSelector((state) => state.products);
+  const [page, setPage] = useState(1);
 
   const handleViewClick = (id) => {
     navigate(`/product/${id}`);
@@ -15,6 +16,14 @@ const Products = () => {
 
   const handleEditClick = (id) => {
     navigate(`/edit-product/${id}`);
+  };
+
+  const totalProducts = Math.ceil(products.length / 12);
+
+  const handlePageChange = (newPage) => {
+    if (newPage < 1) newPage = 1;
+    if (newPage > totalProducts) newPage = totalProducts;
+    setPage(newPage);
   };
 
   useEffect(() => {
@@ -25,7 +34,7 @@ const Products = () => {
     <Container>
       <h1 className="text-center">Product Lists</h1>
       <Row xs={1} md={2} lg={3} xl={4} className="my-3 g-4">
-        {products.map((val) => (
+        {products.slice((page - 1) * 12, page * 12).map((val) => (
           <Col key={val.id}>
             <Card className="h-100">
               <Carousel>
@@ -62,6 +71,26 @@ const Products = () => {
           </Col>
         ))}
       </Row>
+      <Card.Footer className="p-3 d-flex gap-5 justify-content-center">
+        <Button
+          variant={page === 1 ? "outline-secondary" : "outline-primary"}
+          size="lg"
+          onClick={() => handlePageChange(page - 1)}
+          disabled={page === 1}
+        >
+          Prev
+        </Button>
+        <Button
+          variant={
+            page === totalProducts ? "outline-secondary" : "outline-primary"
+          }
+          size="lg"
+          onClick={() => handlePageChange(page + 1)}
+          disabled={page === totalProducts}
+        >
+          Next
+        </Button>
+      </Card.Footer>
     </Container>
   );
 };
