@@ -45,3 +45,14 @@ export const updateProductService = async ({ id, product }) => {
     throw new Error(errorMessage);
   }
 };
+
+export const deleteProductService = async (id) => {
+  try {
+    const response = await axios.delete(`${apiUrl}/${id}`);
+    return response.data;
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message || "Failed to delete product";
+    throw new Error(errorMessage);
+  }
+};

@@ -1,11 +1,15 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import {
   createProductService,
+  deleteProductService,
   fetchProductByIdService,
   fetchProductsService,
   updateProductService,
 } from "../services/productServices";
 import {
+  deleteProductFailure,
+  deleteProductStart,
+  deleteProductSuccess,
   fetchProductsFailure,
   fetchProductsStart,
   fetchProductsSuccess,
@@ -59,6 +63,15 @@ function* updateProductSaga(action) {
   }
 }
 
+function* deleteProductSaga(action) {
+  try {
+    yield call(deleteProductService, action.payload);
+    yield put(deleteProductSuccess());
+  } catch (error) {
+    yield put(deleteProductFailure(error));
+  }
+}
+
 export function* watcherProductSaga() {
   yield takeEvery(fetchProductsStart().type, productSaga);
 }
@@ -70,4 +83,7 @@ export function* watcherCreateProductSaga() {
 }
 export function* watcherUpdateProductSaga() {
   yield takeEvery(updateProductStart, updateProductSaga);
+}
+export function* watcherDeleteProductSaga() {
+  yield takeEvery(deleteProductStart, deleteProductSaga);
 }

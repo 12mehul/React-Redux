@@ -1,6 +1,7 @@
 import { all } from "redux-saga/effects";
 import {
   watcherCreateProductSaga,
+  watcherDeleteProductSaga,
   watcherProductSaga,
   watcherSingleProductSaga,
   watcherUpdateProductSaga,
@@ -12,5 +13,6 @@ export default function* rootSagas() {
     watcherSingleProductSaga(),
     watcherCreateProductSaga(),
     watcherUpdateProductSaga(),
+    watcherDeleteProductSaga(),
   ]);
 }

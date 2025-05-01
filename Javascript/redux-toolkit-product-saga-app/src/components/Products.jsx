@@ -52,7 +52,7 @@ const Products = () => {
       <h1 className="text-center">Product Lists</h1>
       <Row xs={1} md={2} lg={3} xl={4} className="my-3 g-4">
         {loading ? (
-          <div className="d-flex justify-content-center align-items-center">
+          <div className="w-100 d-flex justify-content-center align-items-center">
             <Spinner animation="border" variant="primary" />
           </div>
         ) : (
